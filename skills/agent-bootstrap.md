@@ -28,19 +28,34 @@ names to the project):
   file-by-file layout of the repository.
 - **`conventions.md`** — how the project's documents and code are structured
   and formatted: naming, entry format, ordering rules, style rules.
-- **`agent-workflow.md`** — how agents should operate day to day; see the
-  "Docs and Implementation Sync" section below for its core rule.
+- **`plan.md`** — the open-task list (fixed location used by the copied
+  workflow files; see step 3).
 - **Planned docs** (reference them from `AGENTS.md` as "planned but not yet
   written"): `contribution.md` for the contribution workflow and `tooling.md`
   for build/CI behavior. Until they exist, point agents at the repo's
   existing `CONTRIBUTING.md`, `Makefile`, and CI workflows.
 
-### 3. Write `AGENTS.md` at the Root
+### 3. Copy the Workflow Files
+
+The companion files `task_tracking.md`, `report_tracking.md`, and `work.md`
+sit in the same directory as this prompt. Obtain them the same way you
+obtained this prompt: if it was given as a local file, copy from that
+directory; if it was fetched from a URL, fetch each companion from the
+same URL, replacing this prompt's filename with the companion's. Copy all
+three into the new project's `spec/skills/` (create the directory) verbatim.
+
+These files define the day-to-day workflow and use fixed locations: the
+plan document `spec/docs/plan.md` and the reports under `spec/report/`.
+Do not rename the files or the locations they reference.
+
+### 4. Write `AGENTS.md` at the Root
 
 Keep it short. State the repo purpose in one line, then list the `spec/docs/`
 files with a one-line description of what each covers, and instruct agents to
-read them before working. Mention planned docs and where to find the
-authoritative rules until they exist.
+read them before working. Also list the `spec/skills/` workflow files
+(`work.md`, `task_tracking.md`, `report_tracking.md`) and instruct agents to
+read them. Mention planned docs and where to find the authoritative rules
+until they exist.
 
 ## Docs and Implementation Sync
 
@@ -56,8 +71,9 @@ sync while working. At the commit/finish point of any task, the agent MUST:
   unclear whether the code or the document reflects the intended behavior. Do
   not guess.
 
-This rule belongs in `spec/docs/agent-workflow.md` and must be written so it
-survives: concise, directive, and unmissable.
+This rule belongs in the project's workflow file — `spec/skills/work.md`
+(copied in step 3) — and must be written so it survives: concise, directive,
+and unmissable.
 
 ## Design Decisions
 
@@ -75,5 +91,6 @@ survives: concise, directive, and unmissable.
 
 ## Commit
 
-Commit the new `AGENTS.md` and `spec/docs/` files with a short imperative
-message in the style of the repo's existing history.
+Commit the new `AGENTS.md`, the copied `spec/skills/` workflow files, and
+the `spec/docs/` files with a short imperative message in the style of the
+repo's existing history.
